@@ -56,7 +56,10 @@ class MajorMaker:
             images_list = []
             for i in images:
                 a = i['src']
-                if '.jpg' in a:
+                # ad hoc error handling — source website switches between .webp and .jpg
+                if '.webp' in a:
+                    images_list.append(a)
+                elif '.jpg' in a:
                     images_list.append(a)
 
             return images_list
