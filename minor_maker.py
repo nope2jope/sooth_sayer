@@ -4,16 +4,6 @@ from bs4 import BeautifulSoup
 
 class MinorMaker:
     def __init__(self):
-        self.template = {
-            'name': '',
-            'id': '',
-            'img_url': '',
-            'meaning': {
-                'Upright': '',
-                'Reversed': '',
-            }
-        }
-
         self.houses = ['wands', 'cups', 'swords', 'pentacles']
 
         def pull_sources():
@@ -102,7 +92,7 @@ class MinorMaker:
                     'name': labels[i],
                     'id': i + 1,
                     'img_url': 0,
-                    'meanings': meanings[i],
+                    'meaning': meanings[i],
                 }
                 deck.append(card)
             return deck
