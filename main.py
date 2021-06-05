@@ -8,6 +8,8 @@ minor_arcana = MinorMaker().minor_cards
 
 tarot_deck = major_arcana + minor_arcana
 
+spread = [1, 3, 4, 10]
+
 fortune = fortune_teller(deck=tarot_deck, spread=3)
 
 for card in fortune:

@@ -1,5 +1,6 @@
 import random
 
+# determines positional of the card
 def flip_card():
     pos = [0,1]
     position = random.choice(pos)
@@ -9,6 +10,7 @@ def flip_card():
     elif position == 1:
         return 'Reversed'
 
+# selects and compiles cards given a chosen spread, deck
 def fortune_teller(deck, spread):
     reading = []
 
@@ -22,5 +24,6 @@ def fortune_teller(deck, spread):
         }
 
         reading.append(fortune)
+
     return reading
 

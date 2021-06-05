@@ -86,4 +86,5 @@ class MajorMaker:
         m = fetch_majors(doc=self.document)
         i = fetch_images(doc=self.document)
 
+        # overall output of the Class
         self.major_cards = compile_majors(labels=l, majors=m, images=i)
