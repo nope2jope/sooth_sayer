@@ -1,3 +1,4 @@
+from image_maker import MirrorMirror
 import requests
 import re
 from bs4 import BeautifulSoup
@@ -50,20 +51,6 @@ class MajorMaker:
 
             return majors_list
 
-        # finds card face images
-        def fetch_images(doc):
-            images = doc.find_all('img')
-            images_list = []
-            for i in images:
-                a = i['src']
-                # ad hoc error handling — source website switches between .webp and .jpg
-                if '.webp' in a:
-                    images_list.append(a)
-                elif '.jpg' in a:
-                    images_list.append(a)
-
-            return images_list
-
         # compile and formats list elements into maj arcana dictionary
         def compile_majors(labels, majors, images):
             deck = []
@@ -72,7 +59,6 @@ class MajorMaker:
                 card_name = labels[i].split(str(i))[0].strip('()').rstrip()
                 card = {
                     'name': card_name,
-                    'id': i,
                     'img_url': images[i],
                     'meaning': {
                         'Upright': majors[i][1],
@@ -82,9 +68,10 @@ class MajorMaker:
                 deck.append(card)
             return deck
 
+        # images retrieved from image_maker module
         l = fetch_labels(doc=self.document)
         m = fetch_majors(doc=self.document)
-        i = fetch_images(doc=self.document)
+        i = MirrorMirror().formatted_images['major_arcana']
 
         # overall output of the Class
         self.major_cards = compile_majors(labels=l, majors=m, images=i)

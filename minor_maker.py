@@ -1,5 +1,6 @@
-import requests
+from image_maker import MirrorMirror
 from bs4 import BeautifulSoup
+import requests
 
 
 class MinorMaker:
@@ -11,6 +12,7 @@ class MinorMaker:
         def pull_sources():
             suit_dict_list = []
 
+            # inserts house into get request
             for house in self.houses:
                 response = requests.get(
                     url=f'https://www.tarotcardmeanings.net/waite-tarot-comments/waite-on-tarot-{house}.htm')
@@ -92,30 +94,31 @@ class MinorMaker:
             return minors
 
         # compiles cards from a given house/suit (i.e. wands, cups)
-        def compile_house(labels, meanings):
+        def compile_house(labels, images, meanings):
             deck = []
             for i in range(14):
                 card = {
                     'name': labels[i],
-                    # unlike major arcana, card ids/numbers don't start at zero
-                    'id': i + 1,
-                    'img_url': 0,
+                    'img_url': images[i],
                     'meaning': meanings[i],
                 }
                 deck.append(card)
             return deck
 
+        decks = []
         self.minor_cards = []
         count = 0
 
         # assembles minor cards into self.minor_cards variable
+        # images retrieved from image_maker module
         for house in self.houses:
             l = fetch_minor_arcana(doc=self.sources[count][house])
             m = fetch_minor_meaning(doc=self.sources[count][house])
-            d = compile_house(labels=l, meanings=m)
-            self.minor_cards.append(d)
+            i = MirrorMirror().formatted_images[house]
+            d = compile_house(labels=l, images=i, meanings=m)
+            decks.append(d)
             count += 1
 
-        # isolates inner list from outer, redundant listing
-        # overall output of the Class
-        self.minor_cards = self.minor_cards[0]
+        # reassembles minor cards into single deck
+        for set in decks:
+            self.minor_cards += set

@@ -2,7 +2,6 @@ from major_maker import MajorMaker
 from minor_maker import MinorMaker
 from croupier import fortune_teller
 
-
 major_arcana = MajorMaker().major_cards
 minor_arcana = MinorMaker().minor_cards
 
