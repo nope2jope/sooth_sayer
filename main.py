@@ -1,22 +1,20 @@
-from major_maker import MajorMaker
-from minor_maker import MinorMaker
 from croupier import fortune_teller
-from deck_writer import CardManager
+from deck_writer import write_deck, fetch_deck
 from pprint import pprint
 import os.path
 
 # checks to see if csv exists
-# if not, runs functions to scrape and assemble card info
+# if not, runs functions to scrape and format card info
 if not os.path.exists('tarot_deck.csv'):
-    CardManager().write_deck()
+    write_deck()
 
 # retrieves info from csv file
-tarot_deck = CardManager().fetch_deck()
+tarot_deck = fetch_deck()
 
 # fortune contains information w/o visual output unless printed
 fortune = fortune_teller(deck=tarot_deck, spread=3)
 
-# tells fortune w/o indicating
+# prints fortune data
 for card in fortune:
     pprint(list(card.values()))
 

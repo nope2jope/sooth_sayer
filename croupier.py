@@ -12,7 +12,6 @@ def flip_card():
         return 'Reversed'
 
 
-# TODO: indicate position in fortune — maybe on app-side?
 # selects and compiles cards given a chosen spread, deck
 def fortune_teller(deck, spread):
     reading = []
@@ -24,6 +23,7 @@ def fortune_teller(deck, spread):
             'id': card['id'],
             'name': card['name'],
             'img_url': card['img_url'],
+            # indicates the position, though should be visual reference as well
             'meaning': f'{position}: ' + card['meaning'][position],
         }
 

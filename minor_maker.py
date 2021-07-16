@@ -96,6 +96,7 @@ class MinorMaker:
         # compiles cards from a given house/suit (i.e. wands, cups)
         def compile_house(labels, images, meanings):
             deck = []
+            # fourteen cards per house
             for i in range(14):
                 card = {
                     'name': labels[i],
@@ -110,6 +111,7 @@ class MinorMaker:
         count = 0
 
         # assembles minor cards into self.minor_cards variable
+        # depends on scraped data being correctly ordered as opposed to inherently associated
         # images retrieved from image_maker module
         for house in self.houses:
             l = fetch_minor_arcana(doc=self.sources[count][house])
